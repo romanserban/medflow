@@ -1,5 +1,4 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
-import { cn } from '../utils/cn'
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
 type ButtonSize = 'sm' | 'md' | 'lg'
@@ -38,12 +37,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={cn(
-        baseClassName,
-        variantClassNames[variant],
-        sizeClassNames[size],
-        className,
-      )}
+      className={`${baseClassName} ${variantClassNames[variant]} ${sizeClassNames[size]} ${className}`}
       disabled={disabled}
       type={type}
       {...props}

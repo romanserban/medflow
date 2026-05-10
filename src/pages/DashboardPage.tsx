@@ -9,12 +9,10 @@ import {
 } from 'recharts'
 import { Card } from '../components/Card'
 import { admissionsOverview, overviewMetrics } from '../data/dashboard'
-import { cn } from '../utils/cn'
 import { getTrendClassName } from '../utils/formatters'
 
 const pageStackClassName = 'space-y-6'
 const metricsGridClassName = 'grid gap-4 sm:grid-cols-2 xl:grid-cols-4'
-const metricCardClassName = 'p-5'
 const metricHeaderClassName = 'flex items-start justify-between gap-4'
 const metricLabelClassName = 'text-sm font-medium text-slate-500'
 const metricValueClassName = 'mt-3 text-3xl font-semibold tracking-tight text-slate-950'
@@ -23,12 +21,8 @@ const metricIconClassName =
 const metricFooterClassName = 'mt-5 flex items-center justify-between gap-3'
 const metricHelperClassName = 'text-sm text-slate-500'
 const trendBadgeClassName = 'rounded-full px-2.5 py-1 text-xs font-semibold'
-const chartCardClassName = 'p-5'
-const chartHeaderClassName =
-  'flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'
-const chartTitleClassName = 'text-lg font-semibold text-slate-950'
-const chartSubtitleClassName = 'mt-1 text-sm text-slate-500'
-const legendClassName = 'flex items-center gap-4 text-sm text-slate-500'
+const chartDescription = 'Weekly admitted and discharged patient volume'
+const legendClassName = 'mb-5 flex items-center gap-4 text-sm text-slate-500'
 const legendItemClassName = 'flex items-center gap-2'
 const admittedLegendClassName = 'h-2.5 w-2.5 rounded-full bg-clinical-600'
 const dischargedLegendClassName = 'h-2.5 w-2.5 rounded-full bg-emerald-500'
@@ -42,7 +36,7 @@ export function DashboardPage() {
           const Icon = metric.icon
 
           return (
-            <Card key={metric.id} className={metricCardClassName}>
+            <Card key={metric.id}>
               <div className={metricHeaderClassName}>
                 <div>
                   <p className={metricLabelClassName}>{metric.label}</p>
@@ -56,10 +50,9 @@ export function DashboardPage() {
               <div className={metricFooterClassName}>
                 <p className={metricHelperClassName}>{metric.helperText}</p>
                 <span
-                  className={cn(
-                    trendBadgeClassName,
-                    getTrendClassName(metric.trend.direction),
-                  )}
+                  className={`${trendBadgeClassName} ${getTrendClassName(
+                    metric.trend.direction,
+                  )}`}
                 >
                   {metric.trend.value}
                 </span>
@@ -69,24 +62,16 @@ export function DashboardPage() {
         })}
       </section>
 
-      <Card className={chartCardClassName}>
-        <div className={chartHeaderClassName}>
-          <div>
-            <h2 className={chartTitleClassName}>Admissions Flow</h2>
-            <p className={chartSubtitleClassName}>
-              Weekly admitted and discharged patient volume
-            </p>
-          </div>
-          <div className={legendClassName}>
-            <span className={legendItemClassName}>
-              <span className={admittedLegendClassName} />
-              Admitted
-            </span>
-            <span className={legendItemClassName}>
-              <span className={dischargedLegendClassName} />
-              Discharged
-            </span>
-          </div>
+      <Card title="Admissions Flow" description={chartDescription}>
+        <div className={legendClassName}>
+          <span className={legendItemClassName}>
+            <span className={admittedLegendClassName} />
+            Admitted
+          </span>
+          <span className={legendItemClassName}>
+            <span className={dischargedLegendClassName} />
+            Discharged
+          </span>
         </div>
 
         <div className={chartFrameClassName}>

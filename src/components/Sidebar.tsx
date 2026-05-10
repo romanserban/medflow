@@ -7,7 +7,6 @@ import {
   UsersRound,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
-import { cn } from '../utils/cn'
 
 const sidebarClassName =
   'fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white px-5 py-6 lg:block'
@@ -52,10 +51,9 @@ export function Sidebar() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                cn(
-                  navItemClassName,
-                  isActive ? activeNavItemClassName : inactiveNavItemClassName,
-                )
+                `${navItemClassName} ${
+                  isActive ? activeNavItemClassName : inactiveNavItemClassName
+                }`
               }
             >
               <Icon size={18} aria-hidden="true" />
