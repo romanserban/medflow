@@ -17,7 +17,7 @@ export function PagePanel({ children, eyebrow, title }: PagePanelProps) {
     <Card className={panelClassName}>
       <p className={eyebrowClassName}>{eyebrow}</p>
       <h2 className={titleClassName}>{title}</h2>
-      <p className={bodyClassName}>{children}</p>
+      <div className={bodyClassName}>{children}</div>
     </Card>
   )
 }
