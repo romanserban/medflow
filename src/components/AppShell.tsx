@@ -2,7 +2,7 @@ import { Bell, HeartPulse, Search, Settings } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 
 const navigationItems = [
-  { label: 'Overview', to: '/' },
+  { label: 'Overview', to: '/dashboard' },
   { label: 'Patients', to: '/patients' },
   { label: 'Appointments', to: '/appointments' },
 ]
