@@ -1,46 +1,41 @@
 import { HeartPulse } from 'lucide-react'
+import { Button } from '../components/Button'
+import { Card } from '../components/Card'
+import { Input } from '../components/Input'
+
+const loginPageClassName =
+  'flex min-h-screen items-center justify-center bg-slate-100 px-4 py-10 text-slate-950'
+const loginCardClassName = 'w-full max-w-md p-8'
+const brandClassName = 'flex items-center gap-3'
+const brandIconClassName =
+  'flex h-11 w-11 items-center justify-center rounded-lg bg-clinical-600 text-white'
+const titleClassName = 'text-2xl font-semibold'
+const subtitleClassName = 'mt-1 text-sm text-slate-500'
+const formClassName = 'mt-8 space-y-5'
 
 export function LoginPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-100 px-4 py-10 text-slate-950">
-      <section className="w-full max-w-md rounded-lg border border-slate-200 bg-white p-8 shadow-panel">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-clinical-600 text-white">
+    <main className={loginPageClassName}>
+      <Card className={loginCardClassName}>
+        <div className={brandClassName}>
+          <div className={brandIconClassName}>
             <HeartPulse size={24} aria-hidden="true" />
           </div>
           <div>
-            <h1 className="text-2xl font-semibold">MedFlow</h1>
-            <p className="mt-1 text-sm text-slate-500">Sign in to continue</p>
+            <h1 className={titleClassName}>MedFlow</h1>
+            <p className={subtitleClassName}>Sign in to continue</p>
           </div>
         </div>
 
-        <form className="mt-8 space-y-5">
-          <label className="block">
-            <span className="text-sm font-medium text-slate-700">Email</span>
-            <input
-              className="mt-2 h-11 w-full rounded-md border border-slate-200 px-3 text-sm outline-none transition focus:border-clinical-600 focus:ring-4 focus:ring-clinical-100"
-              type="email"
-              placeholder="name@hospital.org"
-            />
-          </label>
+        <form className={formClassName}>
+          <Input label="Email" type="email" placeholder="name@hospital.org" />
+          <Input label="Password" type="password" placeholder="Enter your password" />
 
-          <label className="block">
-            <span className="text-sm font-medium text-slate-700">Password</span>
-            <input
-              className="mt-2 h-11 w-full rounded-md border border-slate-200 px-3 text-sm outline-none transition focus:border-clinical-600 focus:ring-4 focus:ring-clinical-100"
-              type="password"
-              placeholder="Enter your password"
-            />
-          </label>
-
-          <button
-            className="h-11 w-full rounded-md bg-clinical-600 text-sm font-semibold text-white transition hover:bg-clinical-700"
-            type="button"
-          >
+          <Button className="w-full" size="lg">
             Sign In
-          </button>
+          </Button>
         </form>
-      </section>
+      </Card>
     </main>
   )
 }

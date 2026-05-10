@@ -7,69 +7,89 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { Card } from '../components/Card'
 import { admissionsOverview, overviewMetrics } from '../data/dashboard'
+import { cn } from '../utils/cn'
 import { getTrendClassName } from '../utils/formatters'
+
+const pageStackClassName = 'space-y-6'
+const metricsGridClassName = 'grid gap-4 sm:grid-cols-2 xl:grid-cols-4'
+const metricCardClassName = 'p-5'
+const metricHeaderClassName = 'flex items-start justify-between gap-4'
+const metricLabelClassName = 'text-sm font-medium text-slate-500'
+const metricValueClassName = 'mt-3 text-3xl font-semibold tracking-tight text-slate-950'
+const metricIconClassName =
+  'flex h-11 w-11 items-center justify-center rounded-lg bg-clinical-50 text-clinical-700'
+const metricFooterClassName = 'mt-5 flex items-center justify-between gap-3'
+const metricHelperClassName = 'text-sm text-slate-500'
+const trendBadgeClassName = 'rounded-full px-2.5 py-1 text-xs font-semibold'
+const chartCardClassName = 'p-5'
+const chartHeaderClassName =
+  'flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'
+const chartTitleClassName = 'text-lg font-semibold text-slate-950'
+const chartSubtitleClassName = 'mt-1 text-sm text-slate-500'
+const legendClassName = 'flex items-center gap-4 text-sm text-slate-500'
+const legendItemClassName = 'flex items-center gap-2'
+const admittedLegendClassName = 'h-2.5 w-2.5 rounded-full bg-clinical-600'
+const dischargedLegendClassName = 'h-2.5 w-2.5 rounded-full bg-emerald-500'
+const chartFrameClassName = 'mt-6 h-80'
 
 export function DashboardPage() {
   return (
-    <div className="space-y-6">
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className={pageStackClassName}>
+      <section className={metricsGridClassName}>
         {overviewMetrics.map((metric) => {
           const Icon = metric.icon
 
           return (
-            <article
-              key={metric.id}
-              className="rounded-lg border border-slate-200 bg-white p-5 shadow-panel"
-            >
-              <div className="flex items-start justify-between gap-4">
+            <Card key={metric.id} className={metricCardClassName}>
+              <div className={metricHeaderClassName}>
                 <div>
-                  <p className="text-sm font-medium text-slate-500">{metric.label}</p>
-                  <p className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
-                    {metric.value}
-                  </p>
+                  <p className={metricLabelClassName}>{metric.label}</p>
+                  <p className={metricValueClassName}>{metric.value}</p>
                 </div>
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-clinical-50 text-clinical-700">
+                <div className={metricIconClassName}>
                   <Icon size={22} aria-hidden="true" />
                 </div>
               </div>
 
-              <div className="mt-5 flex items-center justify-between gap-3">
-                <p className="text-sm text-slate-500">{metric.helperText}</p>
+              <div className={metricFooterClassName}>
+                <p className={metricHelperClassName}>{metric.helperText}</p>
                 <span
-                  className={`rounded-full px-2.5 py-1 text-xs font-semibold ${getTrendClassName(
-                    metric.trend.direction,
-                  )}`}
+                  className={cn(
+                    trendBadgeClassName,
+                    getTrendClassName(metric.trend.direction),
+                  )}
                 >
                   {metric.trend.value}
                 </span>
               </div>
-            </article>
+            </Card>
           )
         })}
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-panel">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <Card className={chartCardClassName}>
+        <div className={chartHeaderClassName}>
           <div>
-            <h2 className="text-lg font-semibold text-slate-950">Admissions Flow</h2>
-            <p className="mt-1 text-sm text-slate-500">
+            <h2 className={chartTitleClassName}>Admissions Flow</h2>
+            <p className={chartSubtitleClassName}>
               Weekly admitted and discharged patient volume
             </p>
           </div>
-          <div className="flex items-center gap-4 text-sm text-slate-500">
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-clinical-600" />
+          <div className={legendClassName}>
+            <span className={legendItemClassName}>
+              <span className={admittedLegendClassName} />
               Admitted
             </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+            <span className={legendItemClassName}>
+              <span className={dischargedLegendClassName} />
               Discharged
             </span>
           </div>
         </div>
 
-        <div className="mt-6 h-80">
+        <div className={chartFrameClassName}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={admissionsOverview} margin={{ left: -20, right: 8 }}>
               <defs>
@@ -105,7 +125,7 @@ export function DashboardPage() {
             </AreaChart>
           </ResponsiveContainer>
         </div>
-      </section>
+      </Card>
     </div>
   )
 }

@@ -1,5 +1,18 @@
 import { Bell, Search, Settings } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
+import { Button } from './Button'
+
+const topbarClassName =
+  'sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-4 py-4 backdrop-blur md:px-8'
+const topbarContentClassName = 'flex items-center justify-between gap-4'
+const sectionLabelClassName = 'text-sm font-medium text-slate-500'
+const pageTitleClassName = 'mt-1 text-2xl font-semibold text-slate-950'
+const actionsClassName = 'flex items-center gap-2'
+const searchBoxClassName =
+  'hidden h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-500 md:flex'
+const searchInputClassName =
+  'w-52 bg-transparent text-slate-900 outline-none placeholder:text-slate-400'
+const iconButtonClassName = 'w-10 px-0'
 
 const pageTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
@@ -14,36 +27,34 @@ export function Topbar() {
   const pageTitle = pageTitles[pathname] ?? 'MedFlow'
 
   return (
-    <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-4 py-4 backdrop-blur md:px-8">
-      <div className="flex items-center justify-between gap-4">
+    <header className={topbarClassName}>
+      <div className={topbarContentClassName}>
         <div>
-          <p className="text-sm font-medium text-slate-500">Operations</p>
-          <h1 className="mt-1 text-2xl font-semibold text-slate-950">{pageTitle}</h1>
+          <p className={sectionLabelClassName}>Operations</p>
+          <h1 className={pageTitleClassName}>{pageTitle}</h1>
         </div>
 
-        <div className="flex items-center gap-2">
-          <label className="hidden h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-500 md:flex">
+        <div className={actionsClassName}>
+          <label className={searchBoxClassName}>
             <Search size={16} aria-hidden="true" />
-            <input
-              className="w-52 bg-transparent text-slate-900 outline-none placeholder:text-slate-400"
-              placeholder="Search"
-              type="search"
-            />
+            <input className={searchInputClassName} placeholder="Search" type="search" />
           </label>
-          <button
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 hover:text-slate-950"
-            type="button"
+          <Button
+            className={iconButtonClassName}
+            variant="secondary"
+            size="md"
             aria-label="Notifications"
           >
             <Bell size={18} aria-hidden="true" />
-          </button>
-          <button
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 hover:text-slate-950"
-            type="button"
+          </Button>
+          <Button
+            className={iconButtonClassName}
+            variant="secondary"
+            size="md"
             aria-label="Settings"
           >
             <Settings size={18} aria-hidden="true" />
-          </button>
+          </Button>
         </div>
       </div>
     </header>

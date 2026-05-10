@@ -7,6 +7,20 @@ import {
   UsersRound,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import { cn } from '../utils/cn'
+
+const sidebarClassName =
+  'fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white px-5 py-6 lg:block'
+const brandClassName = 'flex items-center gap-3'
+const brandIconClassName =
+  'flex h-10 w-10 items-center justify-center rounded-lg bg-clinical-600 text-white'
+const brandTitleClassName = 'text-lg font-semibold leading-none'
+const brandSubtitleClassName = 'mt-1 text-sm text-slate-500'
+const navClassName = 'mt-10 space-y-1'
+const navItemClassName =
+  'flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition'
+const activeNavItemClassName = 'bg-clinical-50 text-clinical-700'
+const inactiveNavItemClassName = 'text-slate-600 hover:bg-slate-50 hover:text-slate-950'
 
 const navigationItems = [
   { label: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
@@ -18,18 +32,18 @@ const navigationItems = [
 
 export function Sidebar() {
   return (
-    <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white px-5 py-6 lg:block">
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-clinical-600 text-white">
+    <aside className={sidebarClassName}>
+      <div className={brandClassName}>
+        <div className={brandIconClassName}>
           <HeartPulse size={22} aria-hidden="true" />
         </div>
         <div>
-          <p className="text-lg font-semibold leading-none">MedFlow</p>
-          <p className="mt-1 text-sm text-slate-500">Hospital dashboard</p>
+          <p className={brandTitleClassName}>MedFlow</p>
+          <p className={brandSubtitleClassName}>Hospital dashboard</p>
         </div>
       </div>
 
-      <nav className="mt-10 space-y-1" aria-label="Main navigation">
+      <nav className={navClassName} aria-label="Main navigation">
         {navigationItems.map((item) => {
           const Icon = item.icon
 
@@ -38,12 +52,10 @@ export function Sidebar() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                [
-                  'flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition',
-                  isActive
-                    ? 'bg-clinical-50 text-clinical-700'
-                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-950',
-                ].join(' ')
+                cn(
+                  navItemClassName,
+                  isActive ? activeNavItemClassName : inactiveNavItemClassName,
+                )
               }
             >
               <Icon size={18} aria-hidden="true" />
