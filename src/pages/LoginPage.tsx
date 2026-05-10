@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { HeartPulse } from 'lucide-react'
 import { Button } from '../components/Button'
 import { Card } from '../components/Card'
@@ -14,6 +15,9 @@ const subtitleClassName = 'mt-1 text-sm text-slate-500'
 const formClassName = 'mt-8 space-y-5'
 
 export function LoginPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
     <main className={loginPageClassName}>
       <Card className={loginCardClassName}>
@@ -28,8 +32,20 @@ export function LoginPage() {
         </div>
 
         <form className={formClassName}>
-          <Input label="Email" type="email" placeholder="name@hospital.org" />
-          <Input label="Password" type="password" placeholder="Enter your password" />
+          <Input
+            label="Email"
+            type="email"
+            placeholder="name@hospital.org"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <Input
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
 
           <Button className="w-full" size="lg">
             Sign In
